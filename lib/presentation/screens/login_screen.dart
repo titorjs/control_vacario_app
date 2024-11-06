@@ -1,3 +1,4 @@
+import 'package:control_vacario_app/utils/user_session.dart';
 import 'package:flutter/material.dart';
 import '../../services/api_service.dart';
 
@@ -15,16 +16,21 @@ class _LoginScreenState extends State<LoginScreen> {
     final username = _usernameController.text;
     final password = _passwordController.text;
     final user = await _apiService.login(username, password);
+    final userSession = UserSession();
 
     if (user != null) {
-      // Redirige o guarda los datos de sesión
-      print('Token: ${user.token}');
-      print('User ID: ${user.id}');
-      print('Name: ${user.name}');
-      print('Lastname: ${user.lastname}');
+      //TODO: validate nullability of object :)
+      await userSession.clearSession();
+      await userSession.setToken(user.token!);
+      await userSession.setUserId(user.id!);
+      await userSession.setUserName(user.name!);
+      await userSession.setUserLastname(user.lastname!);
+
+      Navigator.pushNamed(context, '/home');
     } else {
-      // Muestra un mensaje de error
-      print('Login failed');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Credenciales incorrectas")),
+      );
     }
   }
 
@@ -32,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -45,24 +51,24 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             TextField(
               controller: _usernameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Username',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             ElevatedButton(
               onPressed: _login,
-              child: Text('Login'),
+              child: const Text('Login'),
             ),
           ],
         ),
