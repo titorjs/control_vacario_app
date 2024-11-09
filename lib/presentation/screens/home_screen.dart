@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   _buildMenuItem(context, 'Usuarios', Icons.person, '/users'),
                   _buildMenuItem(context, 'Vacas', Icons.pets, '/cows'),
-                  _buildMenuItem(context, 'Producción Diaria', Icons.calendar_today, '/daily_production'),
+                  //_buildMenuItem(context, 'Producción Diaria', Icons.calendar_today, '/daily_production'),
                   _buildMenuItem(context, 'Remedios', Icons.healing, '/remedies'),
                 ],
               ),
