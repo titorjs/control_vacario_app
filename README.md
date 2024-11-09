@@ -1,16 +1,28 @@
-# control_vacario_app
+# Control Vacario App
 
-A new Flutter project.
+Control Vacario App es una aplicación de Flutter diseñada para gestionar vacas, remedios y usuarios en una finca o establecimiento agrícola. La aplicación permite realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) para la gestión de vacas y remedios, y proporciona un sistema de autenticación para los usuarios.
 
-## Getting Started
+## Características
 
-This project is a starting point for a Flutter application.
+- **Autenticación**: Autenticación de usuarios con tokens JWT para proteger los endpoints de la API.
+- **Gestión de Vacas**: Crea, lee, actualiza y elimina información sobre las vacas, incluyendo su tipo y estado.
+- **Gestión de Remedios**: Administra remedios veterinarios con opciones para agregar, editar y eliminar.
+- **Pantallas Dinámicas**: Listas que se actualizan automáticamente al agregar, editar o eliminar elementos, con opción de refresco mediante "pull-to-refresh".
+- **Navegación Simple**: Navegación entre pantallas para facilitar la administración de los recursos.
 
-A few resources to get you started if this is your first Flutter project:
+## Requisitos Previos
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Flutter**: Instalación de [Flutter SDK](https://flutter.dev/docs/get-started/install).
+- **API Backend**: La aplicación requiere una API en Spring Boot que provee los endpoints de autenticación y gestión de vacas y remedios : https://github.com/titorjs/control-vacario-api
+- **Conexión a Internet**: La aplicación necesita acceso a la red para conectarse a la API.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Instalación y Configuración
+
+1. **Clonar el Repositorio**:
+   ```bash
+   git clone https://github.com/tu-usuario/control-vacario-app.git
+   cd control-vacario-app
+
+2. **Correr la aplicación**:
+   ```bash
+   flutter run
