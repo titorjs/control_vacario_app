@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../../models/remedy.dart';
-import '../../utils/user_session.dart';
-import '../../strings/constants.dart';
-import '../../widget/remedy_item.dart';
-import 'add_remedy_screen.dart';
+import '../../../models/remedy.dart';
+import '../../../utils/user_session.dart';
+import '../../../strings/constants.dart';
+import '../../../widget/remedy_item.dart';
+import 'add_remedy/add_remedy_screen.dart';
 
 class RemediesScreen extends StatefulWidget {
   const RemediesScreen({Key? key}) : super(key: key);

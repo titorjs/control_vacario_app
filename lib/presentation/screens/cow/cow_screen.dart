@@ -1,11 +1,11 @@
-import 'package:control_vacario_app/presentation/screens/add_cow_screen.dart';
+import 'package:control_vacario_app/presentation/screens/cow/add_cow/add_cow_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../../models/cow.dart';
-import '../../utils/user_session.dart';
-import '../../strings/constants.dart';
-import '../../widget/cow_item.dart';
+import '../../../models/cow.dart';
+import '../../../utils/user_session.dart';
+import '../../../strings/constants.dart';
+import '../../../widget/cow_item.dart';
 
 class CowsScreen extends StatefulWidget {
   const CowsScreen({Key? key}) : super(key: key);
