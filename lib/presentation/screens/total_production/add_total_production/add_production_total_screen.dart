@@ -11,45 +11,44 @@ class AddProductionTotalScreen extends StatefulWidget {
 
 class _AddProductionTotalScreenState extends State<AddProductionTotalScreen> {
   final TextEditingController _dateController = TextEditingController();
-  final TextEditingController _productController = TextEditingController();
   final TextEditingController _realProductionController = TextEditingController();
+  int? _selectedProductId; // ID del producto seleccionado
 
   Future<void> _saveProduction() async {
-  final session = UserSession();
-  final token = await session.getToken();
+    final session = UserSession();
+    final token = await session.getToken();
 
-  final data = {
-    'id': {
-      'producto': {
-        'productoId': int.parse(_productController.text.trim()),
+    final data = {
+      'id': {
+        'producto': {
+          'productoId': _selectedProductId, // Usamos el valor seleccionado
+        },
+        'produccionDate': _dateController.text.trim(),
       },
-      'produccionDate': _dateController.text.trim(),
-    },
-    'produccionReal': double.parse(_realProductionController.text.trim()),
-    'produccionCalculada': 400.0, // Puedes ajustar este valor según tu lógica
-  };
+      'produccionReal': double.parse(_realProductionController.text.trim()),
+      'produccionCalculada': 400.0, // Ajustar según la lógica
+    };
 
-  final response = await http.post(
-    Uri.parse('$apiUrl/$apiVersion/produccion-total'),
-    headers: {
-      'Authorization': 'Bearer $token',
-      'Content-Type': 'application/json',
-    },
-    body: json.encode(data),
-  );
+    final response = await http.post(
+      Uri.parse('$apiUrl/$apiVersion/produccion-total'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+      body: json.encode(data),
+    );
 
-  if (response.statusCode == 200) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Producción añadida con éxito')),
-    );
-    Navigator.pop(context);
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Error: ${response.reasonPhrase}')),
-    );
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Producción añadida con éxito')),
+      );
+      Navigator.pop(context);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: ${response.reasonPhrase}')),
+      );
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +61,27 @@ class _AddProductionTotalScreenState extends State<AddProductionTotalScreen> {
             TextField(
               controller: _dateController,
               decoration: const InputDecoration(labelText: 'Fecha (YYYY-MM-DD)'),
+              keyboardType: TextInputType.datetime,
             ),
             const SizedBox(height: 16),
-            TextField(
-              controller: _productController,
-              decoration: const InputDecoration(labelText: 'ID del Producto'),
+            DropdownButtonFormField<int>(
+              value: _selectedProductId,
+              decoration: const InputDecoration(labelText: 'Producto'),
+              items: const [
+                DropdownMenuItem(
+                  value: 1,
+                  child: Text('Queso'),
+                ),
+                DropdownMenuItem(
+                  value: 2,
+                  child: Text('Leche'),
+                ),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  _selectedProductId = value;
+                });
+              },
             ),
             const SizedBox(height: 16),
             TextField(
