@@ -5,7 +5,7 @@ import 'presentation/screens/cow/cow_screen.dart';
 import 'presentation/screens/home/home_screen.dart';
 import 'presentation/screens/remedy/remedios_screen.dart';
 import 'presentation/screens/user/users_screen.dart';
-//import 'presentation/screens/total_production/total_production_screen.dart';
+import 'presentation/screens/total_production/production_total_screen.dart';
 import 'presentation/screens/statistics/statistics_screend.dart';
 
 void main() {
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         '/cows': (context) => CowsScreen(),
         //'/daily_production': (context) => DailyProductionScreen(),
         '/remedies': (context) => RemediesScreen(),
-        //'/total_production': (context) => ProductionTotalScreen(),
+        '/total_production': (context) => ProductionTotalScreen(),
         '/statistic': (context) => ProductionStatsScreen(),
       },
     );

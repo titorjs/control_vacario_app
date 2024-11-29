@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   _buildMenuItem(context, 'Vacas', Icons.pets, '/cows'),
                   //_buildMenuItem(context, 'Producción Diaria', Icons.calendar_today, '/daily_production'),
                   _buildMenuItem(context, 'Remedios', Icons.healing, '/remedies'),
-                  //_buildMenuItem(context, 'TotalProduction', Icons.summarize, '/total_production'),
+                  _buildMenuItem(context, 'TotalProduction', Icons.summarize, '/total_production'),
                   _buildMenuItem(context, 'Estadísticas', Icons.timeline, '/statistic'),
                 ],
               ),

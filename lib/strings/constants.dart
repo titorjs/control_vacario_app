@@ -1,2 +1,2 @@
-const String apiUrl = 'http://192.168.1.34:8080/api'; //apiUrl reference
+const String apiUrl = 'https://9e67-104-28-219-216.ngrok-free.app/api'; //apiUrl reference
 const String apiVersion = 'v1'; //apiVersion reference
