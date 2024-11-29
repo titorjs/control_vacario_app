@@ -1,3 +1,5 @@
+import 'package:control_vacario_app/presentation/screens/venta_leche_screen/venta_leche_screen.dart';
+import 'package:control_vacario_app/presentation/screens/venta_queso/venta_queso_screen.dart';
 import 'package:flutter/material.dart';
 import 'presentation/screens/login/login_screen.dart';
 import 'presentation/screens/cow/cow_screen.dart';
@@ -33,6 +35,8 @@ class MyApp extends StatelessWidget {
         //'/daily_production': (context) => DailyProductionScreen(),
         '/remedies': (context) => RemediesScreen(),
         '/total_production': (context) => ProductionTotalScreen(),
+        '/venta_queso': (context) => VentaQuesoScreen(),
+        '/venta_leche': (context) => VentaLecheScreen(),
         '/statistic': (context) => ProductionStatsScreen(),
       },
     );
