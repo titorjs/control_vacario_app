@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../../models/cow.dart';
-import '../../utils/user_session.dart';
-import '../../strings/constants.dart';
+import '../../../../models/cow.dart';
+import '../../../../utils/user_session.dart';
+import '../../../../strings/constants.dart';
 
 class AddCowScreen extends StatefulWidget {
   final Cow? cow; // Parámetro opcional para edición
