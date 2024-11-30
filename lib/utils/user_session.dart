@@ -17,6 +17,7 @@ class UserSession {
   int? _userId;
   String? _userName;
   String? _userLastname;
+  String? _roleId;
 
   // Métodos para manejar los datos de usuario
   Future<void> setToken(String token) async {
@@ -62,11 +63,22 @@ class UserSession {
     return _userLastname;
   }
 
+  Future<void> setRoleId(String roleId) async {
+    _roleId = roleId;
+    await _storage.write(key: 'roleId', value: roleId);
+  }
+
+  Future<String?> getRoleId() async {
+    _roleId ??= await _storage.read(key: 'roleId');
+    return _roleId;
+  }
+
   Future<void> clearSession() async {
     _token = null;
     _userId = null;
     _userName = null;
     _userLastname = null;
+    _roleId = null;
     await _storage.deleteAll();
   }
 }

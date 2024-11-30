@@ -9,25 +9,42 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String? userName;
   String? userLastname;
+  String? roleId;
 
   @override
   void initState() {
-    super.initState();
     _loadUserInfo();
+    super.initState();
   }
 
   Future<void> _loadUserInfo() async {
     final session = UserSession();
     userName = await session.getUserName();
     userLastname = await session.getUserLastname();
+    roleId = await session.getRoleId();
     setState(() {}); // Actualiza la interfaz con los datos obtenidos
+  }
+
+  Future<void> _logout() async {
+    final session = UserSession();
+    await session.clearSession(); // Elimina los datos de la sesión
+    Navigator.pushReplacementNamed(context, '/login'); // Navega a la pantalla de login
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false, // Quitar el botón de ir hacia atrás
         title: Text('Home'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              _logout(); // Llama al método para cerrar sesión
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -50,23 +67,38 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 24),
             // Menú de opciones
             Expanded(
-              child: ListView(
-                children: [
-                  _buildMenuItem(context, 'Usuarios', Icons.person, '/users'),
-                  _buildMenuItem(context, 'Vacas', Icons.pets, '/cows'),
-                  //_buildMenuItem(context, 'Producción Diaria', Icons.calendar_today, '/daily_production'),
-                  _buildMenuItem(context, 'Remedios', Icons.healing, '/remedies'),
-                  _buildMenuItem(context, 'TotalProduction', Icons.summarize, '/total_production'),
-                  _buildMenuItem(context, 'Venta Queso', Icons.calculate, '/venta_queso'),
-                  _buildMenuItem(context, 'Venta Leche', Icons.cloud, '/venta_leche'),
-                  _buildMenuItem(context, 'Estadísticas', Icons.timeline, '/statistic'),
-                ],
-              ),
+              child: menuBuilding(context),
             ),
           ],
         ),
       ),
     );
+  }
+
+  ListView menuBuilding(BuildContext context) {
+    final isAdmin = roleId == 'ROLE_ADMIN';
+    List<Widget> list;
+
+    if(isAdmin){
+      list = [
+        _buildMenuItem(context, 'Usuarios', Icons.person, '/users'),
+                _buildMenuItem(context, 'Vacas', Icons.pets, '/cows'),
+                _buildMenuItem(context, 'Remedios', Icons.healing, '/remedies'),
+                _buildMenuItem(context, 'TotalProduction', Icons.summarize, '/total_production'),
+                _buildMenuItem(context, 'Venta Queso', Icons.calculate, '/venta_queso'),
+                _buildMenuItem(context, 'Venta Leche', Icons.cloud, '/venta_leche'),
+                _buildMenuItem(context, 'Estadísticas', Icons.timeline, '/statistic'),
+      ];
+    } else {
+      list = [
+        _buildMenuItem(context, 'Remedios', Icons.healing, '/remedies'),
+        _buildMenuItem(context, 'Venta Leche', Icons.cloud, '/venta_leche'),
+      ];
+    }
+
+    return ListView(
+              children: list,
+            );
   }
 
   Widget _buildMenuItem(BuildContext context, String title, IconData icon, String route) {
